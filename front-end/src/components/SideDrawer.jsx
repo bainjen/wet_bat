@@ -55,9 +55,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const listOneData = [
+  { label: "Home", icon: <InboxIcon /> },
+  { label: "Quotes", icon: <InboxIcon /> },
+  { label: "Leads", icon: <InboxIcon /> },
+  { label: "Tours", icon: <InboxIcon /> },
+];
+
+const listTwoData = [
+  { label: "Invoices", icon: <InboxIcon /> },
+  { label: "Analytics", icon: <InboxIcon /> },
+  { label: "Team", icon: <InboxIcon /> },
+  { label: "Admin", icon: <InboxIcon /> },
+  { label: "Support", icon: <InboxIcon /> },
+];
+
 const SideDrawer = ({ isOpen, handleDrawerClose }) => {
   const classes = useStyles();
   const theme = useTheme();
+
+  const listOne = listOneData.map((d, i) => {
+    return (
+      <ListItem button key={d.label}>
+        <ListItemIcon>{d.icon}</ListItemIcon>
+        <ListItemText primary={d.label} />
+      </ListItem>
+    );
+  });
+
+  const listTwo = listTwoData.map((d, i) => {
+    return (
+      <ListItem button key={d.label}>
+        <ListItemIcon>{d.icon}</ListItemIcon>
+        <ListItemText primary={d.label} />
+      </ListItem>
+    );
+  });
 
   return (
     <div className={classes.root}>
@@ -73,27 +106,11 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
       >
         <div className={classes.drawerHeader}></div>
         <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        {listOne}
         <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        {listTwo}
+        <Divider />
+        <Typography>All rights reserved by wetbat 2020</Typography>
       </Drawer>
       <main
         className={clsx(classes.content, {
