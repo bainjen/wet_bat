@@ -33,3 +33,9 @@
 
 - authentication
 - infrastructure
+
+## Approach
+
+- start on the front end by implementing the layout using Material UI
+  - grid for widget organization, data grid for list of quotes
+- add quote form functionality and connect to the database
