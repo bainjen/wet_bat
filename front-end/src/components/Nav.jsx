@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  appBar: {
+    zIndex: 200,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -74,10 +77,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Nav = () => {
+const Nav = ({ handleDrawer }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  console.log(handleDrawer);
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -106,13 +109,14 @@ const Nav = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={() => handleDrawer((prev) => !prev)}
           >
             <DashboardIcon />
           </IconButton>

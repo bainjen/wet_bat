@@ -1,9 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-// import Button from "@material-ui/core/Button";
 import Nav from "./components/Nav";
+import SideDrawer from "./components/SideDrawer";
 
 function App() {
+  const [open, setOpen] = React.useState(false);
+
   return (
     <div className="App">
       <Helmet>
@@ -22,10 +24,9 @@ function App() {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Helmet>
-      {/* <Button variant="contained" color="primary"> */}
-      {/* Hello World */}
-      {/* </Button> */}
-      <Nav />
+
+      <Nav handleDrawer={setOpen} />
+      <SideDrawer isOpen={open} />
     </div>
   );
 }
