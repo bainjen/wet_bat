@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
     },
 
     btn: {
-      // margin: theme.spacing(1),
-      // width: "25ch",
-      // padding: theme.spacing(2),
-      // textAlign: "center",
-      // color: theme.palette.yellow,
-      // borderRadius: "30%",
+      margin: theme.spacing(1),
+      width: "25ch",
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.green,
+      borderRadius: "30%",
     },
     // InputLabelProps: {
     //   shrink: true,
@@ -26,6 +28,35 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const classes = useStyles();
+
+  // const [departureDate, setDepartureDate] = useState("");
+  // const [returnDate, setReturnDate] = useState("");
+  const [numPeople, setNumPeople] = useState(1);
+  // const [transportation, setTransportation] = useState("");
+
+  const handlePeople = (event) => {
+    setNumPeople(event.target.value);
+  };
+
+  let numOptions = [];
+  for (let i = 1; i <= 30; i++) {
+    numOptions.push(
+      <MenuItem value={i} onChange={handlePeople}>
+        {i}
+      </MenuItem>
+    );
+  }
+  // return (
+  //   <form className={classes.root} noValidate autoComplete="off">
+  //     <div>
+  //       <TextField
+  //         id="standard-select-currency"
+  //         select
+  //         label="Select"
+  //         value={currency}
+  //         onChange={handleChange}
+  //         helperText="Please select your currency"
+  //       >
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -73,7 +104,9 @@ const QuoteForm = () => {
             shrink: true,
           }}
           variant="filled"
-        />
+        >
+          {numOptions}
+        </TextField>
         <TextField
           select
           label="TRANSPORTATION"
@@ -94,7 +127,7 @@ const QuoteForm = () => {
         <Button
           className={classes.btn}
           variant="contained"
-          color="primary"
+          // color="primary"
           disableElevation
           size="large"
         >
