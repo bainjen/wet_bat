@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    height: "400px",
+    minHeight: "400px",
   },
 }));
 
