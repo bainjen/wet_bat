@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
@@ -31,11 +31,13 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    zIndex: -1,
   },
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: theme.palette.gray,
+    position: "relative",
+    zIndex: 200,
+    // zIndex: theme.zIndex.drawer - 200,
   },
   drawerHeader: {
     display: "flex",
@@ -93,11 +95,20 @@ const listTwoData = [
 
 const SideDrawer = ({ isOpen, handleDrawerClose }) => {
   const classes = useStyles();
-  const theme = useTheme();
-
+  const [viewIndex, setViewIndex] = useState(0);
+  const handleListItemClick = (event, index) => {
+    setViewIndex(index);
+  };
+  console.log(viewIndex);
   const listOne = listOneData.map((d, i) => {
     return (
-      <ListItem key={i} className={classes.listItem} button key={d.label}>
+      <ListItem
+        button
+        selected={viewIndex === i}
+        onClick={(event) => handleListItemClick(event, i)}
+        className={classes.listItem}
+        key={d.label}
+      >
         <ListItemIcon className={classes.icon}>{d.icon}</ListItemIcon>
         <ListItemText primary={d.label} />
       </ListItem>
@@ -105,8 +116,15 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
   });
 
   const listTwo = listTwoData.map((d, i) => {
+    const relativeIndex = listOne.length + i;
     return (
-      <ListItem key={i} className={classes.listItem} button key={d.label}>
+      <ListItem
+        className={classes.listItem}
+        button
+        selected={viewIndex === relativeIndex}
+        onClick={(event) => handleListItemClick(event, relativeIndex)}
+        key={d.label}
+      >
         <ListItemIcon className={classes.icon}>{d.icon}</ListItemIcon>
         <ListItemText primary={d.label} />
       </ListItem>
@@ -125,8 +143,6 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}></div>
-        <Divider />
         <List>{listOne}</List>
         <Divider />
         <List>{listTwo}</List>

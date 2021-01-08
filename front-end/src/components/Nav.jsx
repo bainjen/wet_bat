@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    zIndex: 200,
+    zIndex: theme.zIndex.drawer + 1,
     backgroundColor: theme.palette.blue,
   },
   menuButton: {
@@ -81,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
 const Nav = ({ handleDrawer }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  console.log(handleDrawer);
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
