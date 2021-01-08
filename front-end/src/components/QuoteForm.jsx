@@ -21,11 +21,13 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const classes = useStyles();
-
-  const [departureDate, setDepartureDate] = useState(new Date());
-  const [returnDate, setReturnDate] = useState("");
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const [departureDate, setDepartureDate] = useState(today);
+  const [returnDate, setReturnDate] = useState(tomorrow);
   const [numPeople, setNumPeople] = useState(1);
-  // const [transportation, setTransportation] = useState("");
+  const [transportation, setTransportation] = useState("");
 
   const handleDeparture = (date) => {
     setDepartureDate(date);
@@ -38,6 +40,9 @@ const QuoteForm = () => {
   const handlePeople = (event) => {
     setNumPeople(event.target.value);
   };
+  const handleTransportation = (event) => {
+    setTransportation(event.target.value);
+  };
 
   let numOptions = [];
   for (let i = 1; i <= 30; i++) {
@@ -47,6 +52,23 @@ const QuoteForm = () => {
       </MenuItem>
     );
   }
+
+  const transportLabels = [
+    "rental car",
+    "car service",
+    "limo",
+    "train",
+    "bus",
+    "ferry",
+  ];
+
+  const transportOptions = transportLabels.map((label, i) => {
+    return (
+      <MenuItem key={i} value={label} onChange={handleTransportation}>
+        {label}
+      </MenuItem>
+    );
+  });
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -117,7 +139,9 @@ const QuoteForm = () => {
               shrink: true,
             }}
             variant="filled"
-          />
+          >
+            {transportOptions}
+          </TextField>
           <TextField
             required
             label="NAME"
