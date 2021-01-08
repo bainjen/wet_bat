@@ -1,5 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { ThemeProvider } from "@material-ui/core/styles";
+
+import { mainTheme } from "./themes/theme";
 import Nav from "./components/Nav";
 import SideDrawer from "./components/SideDrawer";
 
@@ -24,9 +27,10 @@ function App() {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Helmet>
-
-      <Nav handleDrawer={setOpen} />
-      <SideDrawer isOpen={open} />
+      <ThemeProvider theme={mainTheme}>
+        <Nav handleDrawer={setOpen} />
+        <SideDrawer isOpen={open} />
+      </ThemeProvider>
     </div>
   );
 }

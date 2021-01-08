@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: 200,
+    backgroundColor: theme.palette.blue,
   },
   menuButton: {
     marginRight: theme.spacing(2),
