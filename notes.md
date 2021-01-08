@@ -36,6 +36,11 @@
 
 ## Approach
 
-- start on the front end by implementing the layout using Material UI
-  - grid for widget organization, data grid for list of quotes
-- add quote form functionality and connect to the database
+- implement front end layout
+- create database
+- seed database
+- connect front and back
+
+## Captain's Log Part 1
+
+I decided to begin on the UI with a create react app. I started here because I enjoy having the visual structure of the front end before connecting to the back. Per instructions, I chose a UI component framework. I used material-UI. It's new to me but something I've intended to learn about so I decided to dive in. I relied heavily on examples in the documentation, adjusting them to suit the brief.
