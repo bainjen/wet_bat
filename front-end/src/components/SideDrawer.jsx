@@ -19,6 +19,8 @@ import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import HelpIcon from "@material-ui/icons/Help";
 
+import Dashboard from "./Dashboard";
+
 const drawerWidth = 160;
 
 const useStyles = makeStyles((theme) => ({
@@ -156,7 +158,8 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
           [classes.contentShift]: isOpen,
         })}
       >
-        <div className={classes.drawerHeader} />
+        <Dashboard />
+        {/* <div className={classes.drawerHeader} />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -185,7 +188,7 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
           sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        </Typography> */}
       </main>
     </div>
   );
