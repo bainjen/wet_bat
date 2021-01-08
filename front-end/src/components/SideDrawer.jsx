@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -9,10 +9,17 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import HomeIcon from "@material-ui/icons/Home";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import ListAltRoundedIcon from "@material-ui/icons/ListAltRounded";
+import SendIcon from "@material-ui/icons/Send";
+import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
+import PollIcon from "@material-ui/icons/Poll";
+import GroupIcon from "@material-ui/icons/Group";
+import SettingsIcon from "@material-ui/icons/Settings";
+import HelpIcon from "@material-ui/icons/Help";
 
-const drawerWidth = 240;
+const drawerWidth = 160;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: theme.palette.gray,
   },
   drawerHeader: {
     display: "flex",
@@ -36,6 +44,19 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
+  },
+  listItem: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    color: theme.palette.blue,
+  },
+  icon: {
+    padding: "inherit",
+    color: theme.palette.blue,
+  },
+  caption: {
+    padding: theme.spacing(2),
+    color: theme.palette.darkGray,
   },
   content: {
     flexGrow: 1,
@@ -56,18 +77,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const listOneData = [
-  { label: "Home", icon: <InboxIcon /> },
-  { label: "Quotes", icon: <InboxIcon /> },
-  { label: "Leads", icon: <InboxIcon /> },
-  { label: "Tours", icon: <InboxIcon /> },
+  { label: "Home", icon: <HomeIcon /> },
+  { label: "Quotes", icon: <AttachMoneyIcon /> },
+  { label: "Leads", icon: <ListAltRoundedIcon /> },
+  { label: "Tours", icon: <SendIcon /> },
 ];
 
 const listTwoData = [
-  { label: "Invoices", icon: <InboxIcon /> },
-  { label: "Analytics", icon: <InboxIcon /> },
-  { label: "Team", icon: <InboxIcon /> },
-  { label: "Admin", icon: <InboxIcon /> },
-  { label: "Support", icon: <InboxIcon /> },
+  { label: "Invoices", icon: <InsertDriveFileIcon /> },
+  { label: "Analytics", icon: <PollIcon /> },
+  { label: "Team", icon: <GroupIcon /> },
+  { label: "Admin", icon: <SettingsIcon /> },
+  { label: "Support", icon: <HelpIcon /> },
 ];
 
 const SideDrawer = ({ isOpen, handleDrawerClose }) => {
@@ -76,8 +97,8 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
 
   const listOne = listOneData.map((d, i) => {
     return (
-      <ListItem button key={d.label}>
-        <ListItemIcon>{d.icon}</ListItemIcon>
+      <ListItem key={i} className={classes.listItem} button key={d.label}>
+        <ListItemIcon className={classes.icon}>{d.icon}</ListItemIcon>
         <ListItemText primary={d.label} />
       </ListItem>
     );
@@ -85,8 +106,8 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
 
   const listTwo = listTwoData.map((d, i) => {
     return (
-      <ListItem button key={d.label}>
-        <ListItemIcon>{d.icon}</ListItemIcon>
+      <ListItem key={i} className={classes.listItem} button key={d.label}>
+        <ListItemIcon className={classes.icon}>{d.icon}</ListItemIcon>
         <ListItemText primary={d.label} />
       </ListItem>
     );
@@ -106,11 +127,13 @@ const SideDrawer = ({ isOpen, handleDrawerClose }) => {
       >
         <div className={classes.drawerHeader}></div>
         <Divider />
-        {listOne}
+        <List>{listOne}</List>
         <Divider />
-        {listTwo}
+        <List>{listTwo}</List>
         <Divider />
-        <Typography>All rights reserved by wetbat 2020</Typography>
+        <Typography variant={"caption"} className={classes.caption}>
+          All rights reserved by wetbat 2020
+        </Typography>
       </Drawer>
       <main
         className={clsx(classes.content, {
