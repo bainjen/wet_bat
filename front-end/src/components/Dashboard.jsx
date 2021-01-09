@@ -1,8 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-// import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+import {
+  Divider,
+  Paper,
+  Grid,
+  ListItem,
+  ListItemText,
+} from "@material-ui/core";
 import QuoteForm from "./QuoteForm";
 import QuoteList from "./QuoteList";
 
@@ -18,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     minHeight: "400px",
   },
+  banner: {
+    minHeight: "300px",
+  },
+  headerText: {
+    color: theme.palette.blue,
+  },
 }));
 
 const Dashboard = () => {
@@ -25,21 +35,37 @@ const Dashboard = () => {
 
   return (
     <div className={classes.root}>
-      {/* <Grid container spacing={3}> */}
-
       <Grid container spacing={3}>
         {/* row one  */}
         <Grid item xs={12}>
-          <Paper className={classes.paper}>welcome banner</Paper>
+          <Paper className={classes.banner}>welcome banner</Paper>
         </Grid>
       </Grid>
       {/* row two */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>{<QuoteForm />}</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Quick quote"
+              />
+            </ListItem>
+            <Divider />
+            {<QuoteForm />}
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>{<QuoteList />}</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Pending quotes"
+              />
+            </ListItem>
+            <Divider />
+            {<QuoteList />}
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>new leads list</Paper>
@@ -66,8 +92,6 @@ const Dashboard = () => {
           <Paper className={classes.paper}>close ratios</Paper>
         </Grid>
       </Grid>
-      {/* </Container> */}
-      {/* </Grid> */}
     </div>
   );
 };
