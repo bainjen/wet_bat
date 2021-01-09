@@ -1,0 +1,1 @@
+COPY airports FROM '/Users/jenniferbain/Documents/launchcode/wet_bat/back-end/rawData/large_airports.csv' WITH (FORMAT csv);
