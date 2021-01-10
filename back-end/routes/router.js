@@ -4,6 +4,8 @@ const router = express.Router();
 const cors = require("cors");
 const { Pool } = require("pg");
 
+const { calcDistanceKM, calcQuotePrice } = require("../helpers/helpers");
+
 const dbConfig = {
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
@@ -115,7 +117,19 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
 
   const customers = await getAllCustomers().then((resp) => resp);
   const airports = await getAllAirports().then((resp) => resp);
+  const transportation = await getAllGroundTransportation().then(
+    (resp) => resp
+  );
 
+  const departureAirport = airports.find((d) => d.id === depFlight);
+  const returnAirport = airports.find((d) => d.id === retFlight);
+  const distance = calcDistanceKM(
+    departureAirport.latitude,
+    departureAirport.longitude,
+    returnAirport.latitude,
+    returnAirport.longitude
+  );
+  console.log(distance);
   const selectedCustomer = customers.find((d) => d.email === email);
   let customerId;
   if (selectedCustomer) {
