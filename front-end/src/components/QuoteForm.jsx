@@ -17,6 +17,7 @@ import RetDate from "./quoteInputs/RetDate";
 import Transportation from "./quoteInputs/Transportation";
 import FirstName from "./quoteInputs/FirstName";
 import LastName from "./quoteInputs/LastName";
+import Email from "./quoteInputs/Email";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +40,7 @@ const QuoteForm = () => {
     transportOption,
     firstName,
     lastName,
+    email,
   } = inputState;
 
   const classes = useStyles();
@@ -54,6 +56,7 @@ const QuoteForm = () => {
       transportOption,
       firstName,
       lastName,
+      email,
     });
   };
 
@@ -70,6 +73,7 @@ const QuoteForm = () => {
             <Transportation />
             <FirstName />
             <LastName />
+            <Email />
 
             <Button
               className={classes.btn}

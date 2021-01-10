@@ -24,6 +24,8 @@ const QuoteProvider = ({ children }) => {
     handleFirstName,
     lastName,
     handleLastName,
+    email,
+    handleEmail,
   } = useFormInputs();
 
   return (
@@ -47,6 +49,8 @@ const QuoteProvider = ({ children }) => {
           handleFirstName,
           lastName,
           handleLastName,
+          email,
+          handleEmail,
         },
       }}
     >

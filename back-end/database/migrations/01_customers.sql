@@ -5,5 +5,5 @@ CREATE TABLE customers (
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   phone TEXT, 
-  email TEXT
+  email TEXT NOT NULL
 );

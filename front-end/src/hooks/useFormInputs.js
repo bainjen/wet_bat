@@ -15,6 +15,7 @@ const useFormInputs = () => {
   const [transportOption, setTransportOption] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
 
   // functions
   const handlePeople = (event) => {
@@ -57,6 +58,10 @@ const useFormInputs = () => {
     setLastName(event.target.value);
   };
 
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
   return {
     numPeople,
     handlePeople,
@@ -74,6 +79,8 @@ const useFormInputs = () => {
     handleFirstName,
     lastName,
     handleLastName,
+    email,
+    handleEmail,
   };
 };
 
