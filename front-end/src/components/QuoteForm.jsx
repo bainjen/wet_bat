@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const { dataState } = useContext(QuoteContext);
-  const { transportation, airports } = dataState;
+  const { transportation, airports, loaded } = dataState;
   console.log("transportation", transportation);
 
   const classes = useStyles();
@@ -33,6 +34,11 @@ const QuoteForm = () => {
   const [returnDate, setReturnDate] = useState(tomorrow);
   const [numPeople, setNumPeople] = useState(1);
   const [transportOption, setTransportOption] = useState("");
+
+  const sendQuote = (e) => {
+    e.preventDefault();
+    axios.post("/quotes", { numPeople });
+  };
 
   const handleDeparture = (date) => {
     setDepartureDate(date);
@@ -57,15 +63,7 @@ const QuoteForm = () => {
       </MenuItem>
     );
   }
-
-  // const transportLabels = [
-  //   "rental car",
-  //   "car service",
-  //   "limo",
-  //   "train",
-  //   "bus",
-  //   "ferry",
-  // ];
+  console.log("numPeople", numPeople);
 
   const transportOptions = transportation.map((d, i) => {
     return (
@@ -136,17 +134,19 @@ const QuoteForm = () => {
           >
             {numOptions}
           </TextField>
-          <TextField
-            select
-            label="TRANSPORTATION"
-            type="search"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="filled"
-          >
-            {transportOptions}
-          </TextField>
+          {loaded && (
+            <TextField
+              select
+              label="TRANSPORTATION"
+              type="search"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="filled"
+            >
+              {transportOptions}
+            </TextField>
+          )}
           <TextField
             required
             label="NAME"
@@ -161,6 +161,7 @@ const QuoteForm = () => {
             // color="primary"
             disableElevation
             size="large"
+            onClick={sendQuote}
           >
             Create a quote
           </Button>

@@ -79,4 +79,8 @@ router.get("/quotes", cors(corsOptions), (req, res) => {
     .catch((err) => console.log(err.stack));
 });
 
+router.post("/quotes", cors(corsOptions), (req, res) => {
+  console.log("req", req.body.numPeople);
+});
+
 module.exports = router;
