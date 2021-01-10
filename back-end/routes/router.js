@@ -65,11 +65,33 @@ const insertNewCustomer = async (firstName, lastName, phone, email) => {
     .then((resp) => resp.rows)
     .catch((err) => `Error at insertNewCustomer ${err}`);
 };
-// const insertNewQuote = async () => {
-//   const client = await pool.connect(console.log("connected to the db"));
-//   const query = "INSERT INTO quotes (customer_id, departure_id, destination_id, departure_date, return_date, ground_transportation_id, number_travellers, price)
-//   VALUES (1, 1, 12, '09/12/2021', '09/23/2021', 4, 1, '$1827.54') "
-// }
+const insertNewQuote = async (
+  customerId,
+  departureId,
+  destinationId,
+  departureDate,
+  returnDate,
+  groundTransportationId,
+  numTravellers,
+  price
+) => {
+  const client = await pool.connect(console.log("connected to the db"));
+  const query =
+    "INSERT INTO quotes (customer_id, departure_id, destination_id, departure_date, return_date, ground_transportation_id, number_travellers, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *";
+  return await client
+    .query(query, [
+      customerId,
+      departureId,
+      destinationId,
+      departureDate,
+      returnDate,
+      groundTransportationId,
+      numTravellers,
+      price,
+    ])
+    .then((resp) => resp.rows)
+    .catch((err) => `Error at insertNewQuote ${err}`);
+};
 
 // ROUTES
 router.get("/customers", cors(corsOptions), (req, res) => {
@@ -96,12 +118,6 @@ router.get("/quotes", cors(corsOptions), (req, res) => {
     .catch((err) => console.log(err.stack));
 });
 
-// pull customer data and check whether they exist
-// if they don't exist, add customer to db
-// grab customer id
-// calculate price (distance, transport, numPeople)
-// input data as a new quote
-
 router.post("/quotes", cors(corsOptions), async (req, res) => {
   const {
     numPeople,
@@ -109,7 +125,7 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
     retFlight,
     departureDate,
     returnDate,
-    transportationOption,
+    transportOption,
     firstName,
     lastName,
     email,
@@ -129,7 +145,16 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
     returnAirport.latitude,
     returnAirport.longitude
   );
-  console.log(distance);
+  const { price } = transportation.find((d) => d.id === transportOption);
+  // price is a string
+  const convertedTransportPrice = Number(price.replace("$", ""));
+  const quotePrice = calcQuotePrice(
+    distance,
+    convertedTransportPrice,
+    numPeople
+  );
+
+  // checking to see if customer id exists in db
   const selectedCustomer = customers.find((d) => d.email === email);
   let customerId;
   if (selectedCustomer) {
@@ -144,21 +169,17 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
     customerId = newCustomer.id;
   }
 
-  // let airports;
-  // Promise.all([getAllAirports().then((resp) => resp)]).then((all) => {
-  //   airports = all[0];
-  // });
-
-  // console.log(airports);
-  // console.log(email);
-  // console.log("req people", req.body.numPeople);
-  // console.log("req departure", req.body.depFlight);
-  // console.log("req returnFlight", req.body.retFlight);
-  // console.log("req depDate", req.body.departureDate);
-  // console.log("req retDate", req.body.returnDate);
-  // console.log("req transport", req.body.transportOption);
-  // console.log("req first name", req.body.firstName);
-  // console.log("req last name", req.body.lastName);
+  const newQuote = await insertNewQuote(
+    customerId,
+    depFlight,
+    retFlight,
+    departureDate,
+    returnDate,
+    transportOption,
+    numPeople,
+    quotePrice
+  ).then((resp) => resp[0]);
+  console.log(newQuote);
 });
 
 module.exports = router;
