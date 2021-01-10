@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { mainTheme } from "./themes/theme";
@@ -7,9 +7,8 @@ import SideDrawer from "./components/SideDrawer";
 import useAppData from "./hooks/useAppData";
 
 function App() {
-  const { data, loaded } = useAppData();
-  console.log(data);
-  const [open, setOpen] = React.useState(false);
+  const { customers, airports, transportation, quotes, loaded } = useAppData();
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="App">
