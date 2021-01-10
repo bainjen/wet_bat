@@ -12,6 +12,7 @@ import DepFlight from "./quoteInputs/DepFlight";
 import RetFlight from "./quoteInputs/RetFlight";
 import DepDate from "./quoteInputs/DepDate";
 import RetDate from "./quoteInputs/RetDate";
+import Transportation from "./quoteInputs/Transportation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,18 +25,19 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
-  const { transportation, loaded } = dataState;
+  const { loaded } = dataState;
   const {
     numPeople,
     depFlight,
     retFlight,
     departureDate,
     returnDate,
+    transportOption,
   } = inputState;
-
+  console.log(transportOption);
   const classes = useStyles();
 
-  const [transportOption, setTransportOption] = useState("");
+  // const [transportOption, setTransportOption] = useState("");
 
   const sendQuote = (e) => {
     e.preventDefault();
@@ -45,20 +47,21 @@ const QuoteForm = () => {
       retFlight,
       departureDate,
       returnDate,
+      transportOption,
     });
   };
 
-  const handleTransportation = (event) => {
-    setTransportOption(event.target.value);
-  };
+  // const handleTransportation = (event) => {
+  //   setTransportOption(event.target.value);
+  // };
 
-  const transportOptions = transportation.map((d, i) => {
-    return (
-      <MenuItem key={i} value={d.category}>
-        {d.category}
-      </MenuItem>
-    );
-  });
+  // const transportOptions = transportation.map((d, i) => {
+  //   return (
+  //     <MenuItem key={i} value={d.category}>
+  //       {d.category}
+  //     </MenuItem>
+  //   );
+  // });
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -70,8 +73,8 @@ const QuoteForm = () => {
             <DepDate />
             <RetDate />
             <NumPeople />
-
-            <TextField
+            <Transportation />
+            {/* <TextField
               select
               label="TRANSPORTATION"
               type="search"
@@ -82,7 +85,7 @@ const QuoteForm = () => {
               onChange={handleTransportation}
             >
               {transportOptions}
-            </TextField>
+            </TextField> */}
 
             <TextField
               required

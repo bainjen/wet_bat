@@ -18,6 +18,8 @@ const QuoteProvider = ({ children }) => {
     handleDeparture,
     returnDate,
     handleReturn,
+    transportOption,
+    handleTransportation,
   } = useFormInputs();
 
   return (
@@ -35,6 +37,8 @@ const QuoteProvider = ({ children }) => {
           handleDeparture,
           returnDate,
           handleReturn,
+          transportOption,
+          handleTransportation,
         },
       }}
     >

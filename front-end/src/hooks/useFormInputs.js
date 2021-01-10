@@ -12,6 +12,8 @@ const useFormInputs = () => {
   const [departureDate, setDepartureDate] = useState(today);
   const [returnDate, setReturnDate] = useState(tomorrow);
 
+  const [transportOption, setTransportOption] = useState();
+
   const handlePeople = (event) => {
     setNumPeople(event.target.value);
   };
@@ -40,6 +42,11 @@ const useFormInputs = () => {
     setReturnDate(date);
   };
 
+  const handleTransportation = (event) => {
+    setTransportOption(event.target.value);
+    // console.log(event.target.value);
+  };
+
   return {
     numPeople,
     handlePeople,
@@ -51,6 +58,8 @@ const useFormInputs = () => {
     handleDeparture,
     returnDate,
     handleReturn,
+    transportOption,
+    handleTransportation,
   };
 };
 
