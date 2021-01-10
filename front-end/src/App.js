@@ -4,10 +4,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { mainTheme } from "./themes/theme";
 import Nav from "./components/Nav";
 import SideDrawer from "./components/SideDrawer";
-import useAppData from "./hooks/useAppData";
+import { QuoteProvider } from "./components/QuoteContext";
 
 function App() {
-  const { customers, airports, transportation, quotes, loaded } = useAppData();
+  // const { customers, airports, transportation, quotes, loaded } = useAppData();
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,10 +28,12 @@ function App() {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Helmet>
-      <ThemeProvider theme={mainTheme}>
-        <Nav handleDrawer={setOpen} />
-        <SideDrawer isOpen={open} />
-      </ThemeProvider>
+      <QuoteProvider>
+        <ThemeProvider theme={mainTheme}>
+          <Nav handleDrawer={setOpen} />
+          <SideDrawer isOpen={open} />
+        </ThemeProvider>
+      </QuoteProvider>
     </div>
   );
 }

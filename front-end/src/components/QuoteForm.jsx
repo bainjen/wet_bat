@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -9,6 +9,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import { QuoteContext } from "./QuoteContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const QuoteForm = () => {
+  const { dataState } = useContext(QuoteContext);
+  const { transportation, airports } = dataState;
+  console.log("transportation", transportation);
+
   const classes = useStyles();
   const today = new Date();
   const tomorrow = new Date(today);
@@ -27,7 +32,7 @@ const QuoteForm = () => {
   const [departureDate, setDepartureDate] = useState(today);
   const [returnDate, setReturnDate] = useState(tomorrow);
   const [numPeople, setNumPeople] = useState(1);
-  const [transportation, setTransportation] = useState("");
+  const [transportOption, setTransportOption] = useState("");
 
   const handleDeparture = (date) => {
     setDepartureDate(date);
@@ -41,7 +46,7 @@ const QuoteForm = () => {
     setNumPeople(event.target.value);
   };
   const handleTransportation = (event) => {
-    setTransportation(event.target.value);
+    setTransportOption(event.target.value);
   };
 
   let numOptions = [];
@@ -53,19 +58,19 @@ const QuoteForm = () => {
     );
   }
 
-  const transportLabels = [
-    "rental car",
-    "car service",
-    "limo",
-    "train",
-    "bus",
-    "ferry",
-  ];
+  // const transportLabels = [
+  //   "rental car",
+  //   "car service",
+  //   "limo",
+  //   "train",
+  //   "bus",
+  //   "ferry",
+  // ];
 
-  const transportOptions = transportLabels.map((label, i) => {
+  const transportOptions = transportation.map((d, i) => {
     return (
-      <MenuItem key={i} value={label} onChange={handleTransportation}>
-        {label}
+      <MenuItem key={i} value={d.category} onChange={handleTransportation}>
+        {d.category}
       </MenuItem>
     );
   });
