@@ -25,7 +25,7 @@ const useAppData = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  return { customers, airports, transportation, quotes, loaded };
+  return { customers, airports, transportation, quotes, setQuotes, loaded };
 };
 
 export default useAppData;

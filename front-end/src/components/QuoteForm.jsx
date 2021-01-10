@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
-  const { loaded } = dataState;
+  const { loaded, setQuotes } = dataState;
   const {
     numPeople,
     depFlight,
@@ -47,17 +47,19 @@ const QuoteForm = () => {
 
   const sendQuote = (e) => {
     e.preventDefault();
-    axios.post("/quotes", {
-      numPeople,
-      depFlight,
-      retFlight,
-      departureDate,
-      returnDate,
-      transportOption,
-      firstName,
-      lastName,
-      email,
-    });
+    axios
+      .post("/quotes", {
+        numPeople,
+        depFlight,
+        retFlight,
+        departureDate,
+        returnDate,
+        transportOption,
+        firstName,
+        lastName,
+        email,
+      })
+      .then((resp) => setQuotes(resp.data));
   };
 
   return (

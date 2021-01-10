@@ -179,7 +179,10 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
     numPeople,
     quotePrice
   ).then((resp) => resp[0]);
-  console.log(newQuote);
+
+  await getAllQuotes()
+    .then((resp) => res.json(resp))
+    .catch((err) => console.log(err.stack));
 });
 
 module.exports = router;

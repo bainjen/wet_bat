@@ -5,7 +5,14 @@ import useFormInputs from "../hooks/useFormInputs";
 const QuoteContext = createContext();
 
 const QuoteProvider = ({ children }) => {
-  const { customers, airports, transportation, quotes, loaded } = useAppData();
+  const {
+    customers,
+    airports,
+    transportation,
+    quotes,
+    setQuotes,
+    loaded,
+  } = useAppData();
 
   const {
     numPeople,
@@ -31,7 +38,14 @@ const QuoteProvider = ({ children }) => {
   return (
     <QuoteContext.Provider
       value={{
-        dataState: { customers, airports, transportation, quotes, loaded },
+        dataState: {
+          customers,
+          airports,
+          transportation,
+          quotes,
+          setQuotes,
+          loaded,
+        },
         inputState: {
           numPeople,
           handlePeople,
