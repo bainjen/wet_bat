@@ -83,6 +83,8 @@ router.post("/quotes", cors(corsOptions), (req, res) => {
   console.log("req people", req.body.numPeople);
   console.log("req departure", req.body.depFlight);
   console.log("req returnFlight", req.body.retFlight);
+  console.log("req depDate", req.body.departureDate);
+  console.log("req retDate", req.body.returnDate);
 });
 
 module.exports = router;

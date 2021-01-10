@@ -5,14 +5,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { QuoteContext } from "./QuoteContext";
 import NumPeople from "./quoteInputs/NumPeople";
 import DepFlight from "./quoteInputs/DepFlight";
 import RetFlight from "./quoteInputs/RetFlight";
+import DepDate from "./quoteInputs/DepDate";
+import RetDate from "./quoteInputs/RetDate";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,27 +25,27 @@ const useStyles = makeStyles((theme) => ({
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
   const { transportation, loaded } = dataState;
-  const { numPeople, depFlight, retFlight } = inputState;
+  const {
+    numPeople,
+    depFlight,
+    retFlight,
+    departureDate,
+    returnDate,
+  } = inputState;
 
   const classes = useStyles();
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const [departureDate, setDepartureDate] = useState(today);
-  const [returnDate, setReturnDate] = useState(tomorrow);
+
   const [transportOption, setTransportOption] = useState("");
 
   const sendQuote = (e) => {
     e.preventDefault();
-    axios.post("/quotes", { numPeople, depFlight, retFlight });
-  };
-
-  const handleDeparture = (date) => {
-    setDepartureDate(date);
-  };
-
-  const handleReturn = (date) => {
-    setReturnDate(date);
+    axios.post("/quotes", {
+      numPeople,
+      depFlight,
+      retFlight,
+      departureDate,
+      returnDate,
+    });
   };
 
   const handleTransportation = (event) => {
@@ -68,34 +67,8 @@ const QuoteForm = () => {
           <div>
             <DepFlight />
             <RetFlight />
-
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="dep-date-picker-dialogue"
-              label="Departure Date"
-              value={departureDate}
-              onChange={handleDeparture}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="ret-date-picker-dialogue"
-              label="Departure Date"
-              value={returnDate}
-              onChange={handleReturn}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
+            <DepDate />
+            <RetDate />
             <NumPeople />
 
             <TextField

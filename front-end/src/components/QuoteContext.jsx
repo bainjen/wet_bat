@@ -14,6 +14,10 @@ const QuoteProvider = ({ children }) => {
     handleDepFlight,
     retFlight,
     handleRetFlight,
+    departureDate,
+    handleDeparture,
+    returnDate,
+    handleReturn,
   } = useFormInputs();
 
   return (
@@ -27,6 +31,10 @@ const QuoteProvider = ({ children }) => {
           handleDepFlight,
           retFlight,
           handleRetFlight,
+          departureDate,
+          handleDeparture,
+          returnDate,
+          handleReturn,
         },
       }}
     >
