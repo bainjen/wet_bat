@@ -25,6 +25,7 @@ const Transportation = () => {
         shrink: true,
       }}
       variant="filled"
+      defaultValue={""}
       onChange={handleTransportation}
     >
       {transportOptions}

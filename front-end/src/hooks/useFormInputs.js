@@ -1,19 +1,22 @@
 import { useState } from "react";
 
 const useFormInputs = () => {
+  // date logic
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
+  // input state variables
   const [numPeople, setNumPeople] = useState(1);
   const [depFlight, setDepFlight] = useState();
   const [retFlight, setRetFlight] = useState();
-
   const [departureDate, setDepartureDate] = useState(today);
   const [returnDate, setReturnDate] = useState(tomorrow);
-
   const [transportOption, setTransportOption] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
 
+  // functions
   const handlePeople = (event) => {
     setNumPeople(event.target.value);
   };
@@ -44,7 +47,14 @@ const useFormInputs = () => {
 
   const handleTransportation = (event) => {
     setTransportOption(event.target.value);
-    // console.log(event.target.value);
+  };
+
+  const handleFirstName = (event) => {
+    setFirstName(event.target.value);
+  };
+
+  const handleLastName = (event) => {
+    setLastName(event.target.value);
   };
 
   return {
@@ -60,6 +70,10 @@ const useFormInputs = () => {
     handleReturn,
     transportOption,
     handleTransportation,
+    firstName,
+    handleFirstName,
+    lastName,
+    handleLastName,
   };
 };
 

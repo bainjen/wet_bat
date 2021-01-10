@@ -1,11 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
+
+// MUI
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+
+// COMPONENTS
 import { QuoteContext } from "./QuoteContext";
 import NumPeople from "./quoteInputs/NumPeople";
 import DepFlight from "./quoteInputs/DepFlight";
@@ -13,6 +15,8 @@ import RetFlight from "./quoteInputs/RetFlight";
 import DepDate from "./quoteInputs/DepDate";
 import RetDate from "./quoteInputs/RetDate";
 import Transportation from "./quoteInputs/Transportation";
+import FirstName from "./quoteInputs/FirstName";
+import LastName from "./quoteInputs/LastName";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,11 +37,11 @@ const QuoteForm = () => {
     departureDate,
     returnDate,
     transportOption,
+    firstName,
+    lastName,
   } = inputState;
-  console.log(transportOption);
-  const classes = useStyles();
 
-  // const [transportOption, setTransportOption] = useState("");
+  const classes = useStyles();
 
   const sendQuote = (e) => {
     e.preventDefault();
@@ -48,20 +52,10 @@ const QuoteForm = () => {
       departureDate,
       returnDate,
       transportOption,
+      firstName,
+      lastName,
     });
   };
-
-  // const handleTransportation = (event) => {
-  //   setTransportOption(event.target.value);
-  // };
-
-  // const transportOptions = transportation.map((d, i) => {
-  //   return (
-  //     <MenuItem key={i} value={d.category}>
-  //       {d.category}
-  //     </MenuItem>
-  //   );
-  // });
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -74,27 +68,9 @@ const QuoteForm = () => {
             <RetDate />
             <NumPeople />
             <Transportation />
-            {/* <TextField
-              select
-              label="TRANSPORTATION"
-              type="search"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="filled"
-              onChange={handleTransportation}
-            >
-              {transportOptions}
-            </TextField> */}
+            <FirstName />
+            <LastName />
 
-            <TextField
-              required
-              label="NAME"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="filled"
-            />
             <Button
               className={classes.btn}
               variant="contained"
