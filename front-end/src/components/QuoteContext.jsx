@@ -7,13 +7,18 @@ const QuoteContext = createContext();
 const QuoteProvider = ({ children }) => {
   const { customers, airports, transportation, quotes, loaded } = useAppData();
 
-  const { numPeople, handlePeople } = useFormInputs();
+  const {
+    numPeople,
+    handlePeople,
+    depFlight,
+    handleDepFlight,
+  } = useFormInputs();
 
   return (
     <QuoteContext.Provider
       value={{
         dataState: { customers, airports, transportation, quotes, loaded },
-        inputState: { numPeople, handlePeople },
+        inputState: { numPeople, handlePeople, depFlight, handleDepFlight },
       }}
     >
       {children}

@@ -12,6 +12,7 @@ import {
 } from "@material-ui/pickers";
 import { QuoteContext } from "./QuoteContext";
 import NumPeople from "./quoteInputs/NumPeople";
+import DepFlight from "./quoteInputs/DepFlight";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
   const { transportation, airports, loaded } = dataState;
-  const { numPeople } = inputState;
+  const { numPeople, depFlight } = inputState;
 
   const classes = useStyles();
   const today = new Date();
@@ -33,13 +34,12 @@ const QuoteForm = () => {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [departureDate, setDepartureDate] = useState(today);
   const [returnDate, setReturnDate] = useState(tomorrow);
-  const [depFlight, setDepFlight] = useState();
   const [retFlight, setRetFlight] = useState();
   const [transportOption, setTransportOption] = useState("");
 
   const sendQuote = (e) => {
     e.preventDefault();
-    axios.post("/quotes", { numPeople });
+    axios.post("/quotes", { numPeople, depFlight });
   };
 
   const handleDeparture = (date) => {
@@ -61,37 +61,13 @@ const QuoteForm = () => {
       </MenuItem>
     );
   });
-  console.log("depFlight", depFlight);
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       {loaded && (
         <form className={classes.root} noValidate autoComplete="off">
           <div>
-            <Autocomplete
-              value={depFlight}
-              onChange={(event, newValue) => {
-                if (newValue) {
-                  setDepFlight(newValue.id);
-                } else {
-                  setDepFlight(null);
-                }
-              }}
-              options={airports}
-              getOptionLabel={(option) =>
-                `${option.municipality} (${option.iata_code})`
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  required
-                  label="FROM"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="filled"
-                />
-              )}
-            />
+            <DepFlight />
 
             <Autocomplete
               value={retFlight}

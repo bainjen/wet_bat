@@ -80,7 +80,8 @@ router.get("/quotes", cors(corsOptions), (req, res) => {
 });
 
 router.post("/quotes", cors(corsOptions), (req, res) => {
-  console.log("req", req.body.numPeople);
+  console.log("req people", req.body.numPeople);
+  console.log("req departure", req.body.depFlight);
 });
 
 module.exports = router;
