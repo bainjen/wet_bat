@@ -11,6 +11,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { QuoteContext } from "./QuoteContext";
+import NumPeople from "./quoteInputs/NumPeople";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const QuoteForm = () => {
-  const { dataState } = useContext(QuoteContext);
+  const { dataState, inputState } = useContext(QuoteContext);
   const { transportation, airports, loaded } = dataState;
+  const { numPeople } = inputState;
 
   const classes = useStyles();
   const today = new Date();
@@ -33,7 +35,6 @@ const QuoteForm = () => {
   const [returnDate, setReturnDate] = useState(tomorrow);
   const [depFlight, setDepFlight] = useState();
   const [retFlight, setRetFlight] = useState();
-  const [numPeople, setNumPeople] = useState(1);
   const [transportOption, setTransportOption] = useState("");
 
   const sendQuote = (e) => {
@@ -49,22 +50,9 @@ const QuoteForm = () => {
     setReturnDate(date);
   };
 
-  const handlePeople = (event) => {
-    setNumPeople(event.target.value);
-  };
   const handleTransportation = (event) => {
     setTransportOption(event.target.value);
   };
-
-  let numOptions = [];
-  for (let i = 1; i <= 30; i++) {
-    numOptions.push(
-      <MenuItem key={i} value={i}>
-        {i}
-      </MenuItem>
-    );
-  }
-  console.log("numPeople", numPeople);
 
   const transportOptions = transportation.map((d, i) => {
     return (
@@ -158,21 +146,7 @@ const QuoteForm = () => {
                 "aria-label": "change date",
               }}
             />
-
-            <TextField
-              required
-              select
-              label="PEOPLE"
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="filled"
-              defaultValue={1}
-              onChange={handlePeople}
-            >
-              {numOptions}
-            </TextField>
+            <NumPeople />
 
             <TextField
               select
@@ -198,7 +172,6 @@ const QuoteForm = () => {
             <Button
               className={classes.btn}
               variant="contained"
-              // color="primary"
               disableElevation
               size="large"
               onClick={sendQuote}
@@ -213,15 +186,3 @@ const QuoteForm = () => {
 };
 
 export default QuoteForm;
-
-// const data = {
-//   from: "",
-//   destination: "",
-//   departDate: "",
-//   returnDate: "",
-//   people: [],
-//   transportation: {
-//     type: "",
-//     cost: "",
-//   },
-// };
