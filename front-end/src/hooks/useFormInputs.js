@@ -3,6 +3,7 @@ import { useState } from "react";
 const useFormInputs = () => {
   const [numPeople, setNumPeople] = useState(1);
   const [depFlight, setDepFlight] = useState();
+  const [retFlight, setRetFlight] = useState();
 
   const handlePeople = (event) => {
     setNumPeople(event.target.value);
@@ -16,7 +17,22 @@ const useFormInputs = () => {
     }
   };
 
-  return { numPeople, handlePeople, depFlight, handleDepFlight };
+  const handleRetFlight = (event, newValue) => {
+    if (newValue) {
+      setRetFlight(newValue.id);
+    } else {
+      setRetFlight(null);
+    }
+  };
+
+  return {
+    numPeople,
+    handlePeople,
+    depFlight,
+    handleDepFlight,
+    retFlight,
+    handleRetFlight,
+  };
 };
 
 export default useFormInputs;

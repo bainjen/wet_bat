@@ -12,13 +12,22 @@ const QuoteProvider = ({ children }) => {
     handlePeople,
     depFlight,
     handleDepFlight,
+    retFlight,
+    handleRetFlight,
   } = useFormInputs();
 
   return (
     <QuoteContext.Provider
       value={{
         dataState: { customers, airports, transportation, quotes, loaded },
-        inputState: { numPeople, handlePeople, depFlight, handleDepFlight },
+        inputState: {
+          numPeople,
+          handlePeople,
+          depFlight,
+          handleDepFlight,
+          retFlight,
+          handleRetFlight,
+        },
       }}
     >
       {children}

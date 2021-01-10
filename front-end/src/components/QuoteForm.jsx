@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -13,6 +12,7 @@ import {
 import { QuoteContext } from "./QuoteContext";
 import NumPeople from "./quoteInputs/NumPeople";
 import DepFlight from "./quoteInputs/DepFlight";
+import RetFlight from "./quoteInputs/RetFlight";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
-  const { transportation, airports, loaded } = dataState;
-  const { numPeople, depFlight } = inputState;
+  const { transportation, loaded } = dataState;
+  const { numPeople, depFlight, retFlight } = inputState;
 
   const classes = useStyles();
   const today = new Date();
@@ -34,12 +34,11 @@ const QuoteForm = () => {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [departureDate, setDepartureDate] = useState(today);
   const [returnDate, setReturnDate] = useState(tomorrow);
-  const [retFlight, setRetFlight] = useState();
   const [transportOption, setTransportOption] = useState("");
 
   const sendQuote = (e) => {
     e.preventDefault();
-    axios.post("/quotes", { numPeople, depFlight });
+    axios.post("/quotes", { numPeople, depFlight, retFlight });
   };
 
   const handleDeparture = (date) => {
@@ -68,32 +67,7 @@ const QuoteForm = () => {
         <form className={classes.root} noValidate autoComplete="off">
           <div>
             <DepFlight />
-
-            <Autocomplete
-              value={retFlight}
-              onChange={(event, newValue) => {
-                if (newValue) {
-                  setRetFlight(newValue.id);
-                } else {
-                  setRetFlight(null);
-                }
-              }}
-              options={airports}
-              getOptionLabel={(option) =>
-                `${option.municipality} (${option.iata_code})`
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  required
-                  label="DESTINATION"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="filled"
-                />
-              )}
-            />
+            <RetFlight />
 
             <KeyboardDatePicker
               disableToolbar
