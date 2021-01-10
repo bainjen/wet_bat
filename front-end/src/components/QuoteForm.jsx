@@ -3,7 +3,6 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -58,7 +57,7 @@ const QuoteForm = () => {
   let numOptions = [];
   for (let i = 1; i <= 30; i++) {
     numOptions.push(
-      <MenuItem key={i} value={i} onChange={handlePeople}>
+      <MenuItem key={i} value={i}>
         {i}
       </MenuItem>
     );
@@ -67,7 +66,7 @@ const QuoteForm = () => {
 
   const transportOptions = transportation.map((d, i) => {
     return (
-      <MenuItem key={i} value={d.category} onChange={handleTransportation}>
+      <MenuItem key={i} value={d.category}>
         {d.category}
       </MenuItem>
     );
@@ -99,7 +98,7 @@ const QuoteForm = () => {
             variant="inline"
             format="MM/dd/yyyy"
             margin="normal"
-            id="date-picker-dialogue"
+            id="dep-date-picker-dialogue"
             label="Departure Date"
             value={departureDate}
             onChange={handleDeparture}
@@ -113,7 +112,7 @@ const QuoteForm = () => {
             variant="inline"
             format="MM/dd/yyyy"
             margin="normal"
-            id="date-picker-dialogue"
+            id="ret-date-picker-dialogue"
             label="Departure Date"
             value={returnDate}
             onChange={handleReturn}
@@ -131,6 +130,8 @@ const QuoteForm = () => {
               shrink: true,
             }}
             variant="filled"
+            defaultValue={1}
+            onChange={handlePeople}
           >
             {numOptions}
           </TextField>
@@ -143,6 +144,7 @@ const QuoteForm = () => {
                 shrink: true,
               }}
               variant="filled"
+              onChange={handleTransportation}
             >
               {transportOptions}
             </TextField>
