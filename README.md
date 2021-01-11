@@ -106,7 +106,7 @@ demo
 
 - After I got the structure of the front figured out, I moved to the database
 
-- I created four tables, only bringing in the data needed for this specific task.
+- I created four tables, only bringing in the data needed for this specific task. I made mock functions to calculate flight prices. They are based very simply on distance and number passengers, not reality.
 
 - My first approach to using airport data was to pull real data online into a csv file. I could not figure out how to seed this data into the db with a relative path for other users (I could only get it to work with a direct path from my computer), so in the end, I copied over a small sample of airports to seed the database.
 
