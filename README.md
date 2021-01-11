@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# WET BAT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A desktop app for travel agents to quickly create and manage quotes
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+### Back-end
 
-### `yarn start`
+First, navigate into the back-end directory
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+cd path/to/wet_bat/back-end
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Create Postgres database instance with PSQL
 
-### `yarn test`
+```sh
+createdb wetbat
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Create environment file .env
 
-### `yarn build`
+```sh
+touch .env
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Copy the following variables into .env
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`DB_HOST=localhost`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`DB_NAME=wetbat`
 
-### `yarn eject`
+`DB_PORT=5432`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Download node dependencies in the back-end
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+yarn # npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Run the migrations to create the tables and seed the database by running:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+yarn db:reset
+```
 
-## Learn More
+### Front-end
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Navigate into the front-end directory
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+cd path/to/wet_bat/front-end
+```
 
-### Code Splitting
+Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+yarn # npm install
+```
 
-### Analyzing the Bundle Size
+## Running the application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Start the server on the back-end
 
-### Making a Progressive Web App
+```sh
+cd path/to/wet_bat/back-end
+yarn start # npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Start the front-end
 
-### Advanced Configuration
+```sh
+cd path/to/wet_bat/front-end
+yarn start # npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Screenshots
 
-### Deployment
+home page dashboard view
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![dashboard](front-end/public/wetbat_dashboard.png)
 
-### `yarn build` fails to minify
+quick quote form
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![quick quote form](front-end/public/wetbat_quoteform.png)
+
+date validation on form
+
+![validation](front-end/public/wetbat_datevalidation.png)
+
+view of the quotes tab with the quotes list on the left and an individual quote rendered on the right
+
+![quote tab and single quote form](front-end/public/wetbat_quoteview.png)
+
+demo
+
+![demo](front-end/public/wetbatgif.gif)
+
+## Notes about my process
+
+#### Captain's Log
+
+- I was not yet familiar with Material UI so I began this project by building out the front end nav and sidebar structures to get acquainted.
+
+- Since this was new to me, it was a slow start. Looking back over my code, there is repetition in the jsx. I didn't have time to refactor it, but I did take the time to modularize the QuoteForm component into smaller input Components and map elements where appropriate.
+
+- After I got the structure of the front figured out, I moved to the database
+
+- I created four tables, only bringing in the data needed for this specific task.
+
+- My first approach to using airport data was to pull real data online into a csv file. I could not figure out how to seed this data into the db with a relative path for other users (I could only get it to work with a direct path from my computer), so in the end, I copied over a small sample of airports to seed the database.
+
+- From there, I worked to make a connection from the front to the back so information could be pulled and input from the front end. Since this project is small in scope, I pulled in all the data to the front, rather than making specific queries for data. If this were a larger scale, I imagine I'd need to rethink that strategy.
+
+- In general, I am more comfortable with the front end. However, in this project I struggled to get Material UI to behave in the ways I thought it would while pulling in data, which proved time consuming. I'm glad I used it because my hope is that next time, I'll be savvier with it :)
+
+- My goal was to use TypeScript but given the time constraints and other obstacles, I wound up using JS.
