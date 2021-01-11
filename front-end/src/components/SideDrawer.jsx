@@ -98,14 +98,17 @@ const listTwoData = [
 ];
 
 const SideDrawer = ({ isOpen, handleDrawerClose }) => {
-  const { quoteState } = useContext(QuoteContext);
+  const { quoteState, inputState } = useContext(QuoteContext);
   const { viewIndex, setViewIndex } = quoteState;
+  const { resetInputs } = inputState;
 
   const classes = useStyles();
   const handleListItemClick = (event, index) => {
     setViewIndex(index);
+    console.log("ive been clicked");
+    resetInputs();
   };
-  console.log(viewIndex);
+
   const listOne = listOneData.map((d, i) => {
     return (
       <ListItem

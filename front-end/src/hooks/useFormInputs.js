@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-const useFormInputs = () => {
+const useFormInputs = (airports) => {
   // date logic
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const options = airports.map((d) => `${d.municipality} (${d.iata_code})`);
 
   // input state variables
+  const [selectedDepFlight, setSelectedDepFlight] = useState(options[0]);
+  const [selectedRetFlight, setSelectedRetFlight] = useState(options[1]);
   const [numPeople, setNumPeople] = useState(1);
   const [depFlight, setDepFlight] = useState();
   const [retFlight, setRetFlight] = useState();
@@ -17,24 +20,42 @@ const useFormInputs = () => {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
 
+  const resetInputs = () => {
+    console.log("this was called");
+    setSelectedDepFlight(options[0]);
+    setSelectedRetFlight(options[1]);
+    setNumPeople(1);
+    setDepFlight(null);
+    setRetFlight(null);
+    setDepartureDate(today);
+    setReturnDate(tomorrow);
+    setFirstName(null);
+    setLastName(null);
+    setEmail(null);
+  };
+
   // functions
   const handlePeople = (event) => {
     setNumPeople(event.target.value);
   };
 
   const handleDepFlight = (event, newValue) => {
+    setSelectedDepFlight(newValue);
     if (newValue) {
-      setDepFlight(newValue.id);
-    } else {
-      setDepFlight(null);
+      const foundFlight = airports.find((d) => {
+        return `${d.municipality} (${d.iata_code})` === newValue;
+      });
+      setDepFlight(foundFlight.id);
     }
   };
 
   const handleRetFlight = (event, newValue) => {
+    setSelectedRetFlight(newValue);
     if (newValue) {
-      setRetFlight(newValue.id);
-    } else {
-      setRetFlight(null);
+      const foundFlight = airports.find((d) => {
+        return `${d.municipality} (${d.iata_code})` === newValue;
+      });
+      setRetFlight(foundFlight.id);
     }
   };
 
@@ -65,8 +86,11 @@ const useFormInputs = () => {
   return {
     numPeople,
     handlePeople,
+    options,
+    selectedDepFlight,
     depFlight,
     handleDepFlight,
+    selectedRetFlight,
     retFlight,
     handleRetFlight,
     departureDate,
@@ -81,6 +105,7 @@ const useFormInputs = () => {
     handleLastName,
     email,
     handleEmail,
+    resetInputs,
   };
 };
 

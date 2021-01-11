@@ -4,18 +4,23 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { QuoteContext } from "../QuoteContext";
 
 const DepFlight = () => {
-  const { dataState, inputState } = useContext(QuoteContext);
-  const { airports } = dataState;
-  const { depFlight, handleDepFlight } = inputState;
+  const { inputState } = useContext(QuoteContext);
+
+  const { options, selectedDepFlight, handleDepFlight } = inputState;
+
+  const [inputValue, setInputValue] = React.useState("");
 
   return (
     <Autocomplete
-      value={depFlight}
+      value={selectedDepFlight}
       onChange={handleDepFlight}
-      options={airports}
-      getOptionLabel={(option) =>
-        `${option.municipality} (${option.iata_code})`
-      }
+      inputValue={inputValue}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+      }}
+      id="controllable-states-demo"
+      options={options}
+      style={{ width: 300 }}
       renderInput={(params) => (
         <TextField
           {...params}

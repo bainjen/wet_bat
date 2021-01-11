@@ -183,9 +183,6 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
   Promise.all([getAllCustomers(), getAllQuotes()]).then((all) => {
     res.send(all);
   });
-  // await getAllQuotes()
-  //   .then((resp) => res.json(resp))
-  //   .catch((err) => console.log(err.stack));
 });
 
 module.exports = router;

@@ -51,6 +51,7 @@ const QuoteForm = () => {
     firstName,
     lastName,
     email,
+    resetInputs,
   } = inputState;
 
   const sendQuote = (e) => {
@@ -71,6 +72,7 @@ const QuoteForm = () => {
         setCustomers(resp.data[0]);
         setQuotes(resp.data[1]);
       });
+    resetInputs();
   };
 
   const classes = useStyles();

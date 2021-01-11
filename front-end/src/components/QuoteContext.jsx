@@ -27,8 +27,11 @@ const QuoteProvider = ({ children }) => {
   const {
     numPeople,
     handlePeople,
+    options,
+    selectedDepFlight,
     depFlight,
     handleDepFlight,
+    selectedRetFlight,
     retFlight,
     handleRetFlight,
     departureDate,
@@ -43,7 +46,8 @@ const QuoteProvider = ({ children }) => {
     handleLastName,
     email,
     handleEmail,
-  } = useFormInputs();
+    resetInputs,
+  } = useFormInputs(airports);
 
   return (
     <QuoteContext.Provider
@@ -61,8 +65,11 @@ const QuoteProvider = ({ children }) => {
         inputState: {
           numPeople,
           handlePeople,
+          options,
+          selectedDepFlight,
           depFlight,
           handleDepFlight,
+          selectedRetFlight,
           retFlight,
           handleRetFlight,
           departureDate,
@@ -77,6 +84,7 @@ const QuoteProvider = ({ children }) => {
           handleLastName,
           email,
           handleEmail,
+          resetInputs,
         },
         quoteState: {
           viewIndex,
