@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
-  const { loaded, setQuotes } = dataState;
+  const { loaded, setQuotes, setCustomers } = dataState;
   const {
     numPeople,
     depFlight,
@@ -67,7 +67,10 @@ const QuoteForm = () => {
         lastName,
         email,
       })
-      .then((resp) => setQuotes(resp.data));
+      .then((resp) => {
+        setCustomers(resp.data[0]);
+        setQuotes(resp.data[1]);
+      });
   };
 
   const classes = useStyles();

@@ -61,6 +61,7 @@ const useAppData = () => {
 
   return {
     customers,
+    setCustomers,
     airports,
     transportation,
     quotes,

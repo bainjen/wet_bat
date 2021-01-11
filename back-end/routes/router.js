@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const { Pool } = require("pg");
+const { Client } = require("pg");
 
 const { calcDistanceKM, calcQuotePrice } = require("../helpers/helpers");
 
@@ -17,11 +17,14 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-const pool = new Pool(dbConfig);
+const client = new Client(dbConfig);
+
+client
+  .connect(console.log("connected to the db"))
+  .catch((err) => console.log("error connecting to the database", err));
 
 // QUERIES
 const getAllCustomers = async () => {
-  const client = await pool.connect(console.log("connected to the db"));
   const query = "SELECT * FROM customers";
   return await client
     .query(query)
@@ -30,7 +33,6 @@ const getAllCustomers = async () => {
 };
 
 const getAllAirports = async () => {
-  const client = await pool.connect(console.log("connected to the db"));
   const query = "SELECT * FROM airports";
   return await client
     .query(query)
@@ -39,7 +41,6 @@ const getAllAirports = async () => {
 };
 
 const getAllGroundTransportation = async () => {
-  const client = await pool.connect(console.log("connected to the db"));
   const query = "SELECT * FROM ground_transportation";
   return await client
     .query(query)
@@ -48,7 +49,6 @@ const getAllGroundTransportation = async () => {
 };
 
 const getAllQuotes = async () => {
-  const client = await pool.connect(console.log("connected to the db"));
   const query = "SELECT * FROM quotes";
   return await client
     .query(query)
@@ -57,7 +57,6 @@ const getAllQuotes = async () => {
 };
 
 const insertNewCustomer = async (firstName, lastName, phone, email) => {
-  const client = await pool.connect(console.log("connected to the db"));
   const query =
     "insert into customers ( first_name, last_name, phone, email) values ($1, $2, $3, $4) returning *";
   return await client
@@ -75,7 +74,6 @@ const insertNewQuote = async (
   numTravellers,
   price
 ) => {
-  const client = await pool.connect(console.log("connected to the db"));
   const query =
     "INSERT INTO quotes (customer_id, departure_id, destination_id, departure_date, return_date, ground_transportation_id, number_travellers, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *";
   return await client
@@ -180,9 +178,12 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
     quotePrice
   ).then((resp) => resp[0]);
 
-  await getAllQuotes()
-    .then((resp) => res.json(resp))
-    .catch((err) => console.log(err.stack));
+  Promise.all([getAllCustomers(), getAllQuotes()]).then((all) => {
+    res.send(all);
+  });
+  // await getAllQuotes()
+  //   .then((resp) => res.json(resp))
+  //   .catch((err) => console.log(err.stack));
 });
 
 module.exports = router;

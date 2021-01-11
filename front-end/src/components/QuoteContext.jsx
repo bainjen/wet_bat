@@ -15,6 +15,7 @@ const QuoteProvider = ({ children }) => {
 
   const {
     customers,
+    setCustomers,
     airports,
     transportation,
     quotes,
@@ -49,6 +50,7 @@ const QuoteProvider = ({ children }) => {
       value={{
         dataState: {
           customers,
+          setCustomers,
           airports,
           transportation,
           quotes,

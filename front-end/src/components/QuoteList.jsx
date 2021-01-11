@@ -18,7 +18,6 @@ const QuoteList = ({ height, nRow }) => {
   const { dataState, quoteState } = useContext(QuoteContext);
   const { fullQuoteData } = dataState;
   const { handleQuoteClick } = quoteState;
-
   const rows = fullQuoteData.map((quote, i) => {
     return {
       id: quote.id,
