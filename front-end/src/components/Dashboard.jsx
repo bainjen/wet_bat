@@ -72,29 +72,75 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} sm={2}>
           <Paper className={classes.paper} className={classes.r2}>
-            new leads list
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="New leads list"
+              />
+            </ListItem>
+            <Divider />
           </Paper>
         </Grid>
       </Grid>
       {/* row three  */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={10}>
-          <Paper className={classes.paper}>popular destinations feature</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Popular destinations feature"
+              />
+            </ListItem>
+            <Divider />
+          </Paper>
         </Grid>
         <Grid item xs={6} sm={2}>
-          <Paper className={classes.paper}>team chat</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Team chat"
+              />
+            </ListItem>
+            <Divider />
+          </Paper>
         </Grid>
       </Grid>
       {/* row 4 */}
       <Grid container spacing={3}>
         <Grid item xs={6} sm={5}>
-          <Paper className={classes.paper}>revenue chart</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Revenue chart"
+              />
+            </ListItem>
+            <Divider />
+          </Paper>
         </Grid>
         <Grid item xs={6} sm={5}>
-          <Paper className={classes.paper}>potential revenue chart</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Potential revenue chart"
+              />
+            </ListItem>
+            <Divider />
+          </Paper>
         </Grid>
         <Grid item xs={6} sm={2}>
-          <Paper className={classes.paper}>close ratios</Paper>
+          <Paper className={classes.paper}>
+            <ListItem>
+              <ListItemText
+                className={classes.headerText}
+                primary="Close Ratios"
+              />
+            </ListItem>
+            <Divider />
+          </Paper>
         </Grid>
       </Grid>
     </div>

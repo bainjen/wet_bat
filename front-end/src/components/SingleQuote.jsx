@@ -1,14 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Divider,
-  Paper,
-  Grid,
-  ListItem,
-  ListItemText,
-  Card,
-  CardContent,
-} from "@material-ui/core";
+import { Divider, Grid, Card, Typography } from "@material-ui/core";
 
 import { QuoteContext } from "./QuoteContext";
 import QuoteList from "./QuoteList";
@@ -22,13 +14,38 @@ const useStyles = makeStyles((theme) => ({
     color: "theme.palette.blue",
   },
   quote: {
-    // display: "flex",
-    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(5),
     color: theme.palette.blue,
     minHeight: "800px",
   },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+  },
   logo: {
     width: "250px",
+    // alignSelf: "flex-end",
+  },
+  customer: {
+    marginTop: "80px",
+  },
+  flights: {
+    marginTop: "40px",
+  },
+  flightDetails: {
+    display: "flex",
+    margin: "10px 0",
+    justifyContent: "space-between",
+  },
+  depart: {
+    width: "45%",
+    padding: "10px",
+  },
+  other: {
+    marginTop: "20px",
   },
 }));
 
@@ -61,46 +78,69 @@ const SingleQuote = () => {
       <Grid item xs={12} sm={6}>
         {singleQuote && (
           <Card elevation={1} className={classes.quote}>
-            <img src="logo_ombre.png" alt="logo" className={classes.logo} />
-            Quote ID: {singleQuote.id}
-            <br></br>
-            <br></br>
-            Quote made for:
-            {cust.first_name} {cust.last_name}
-            <br></br>
-            phone: {cust.phone}
-            <br></br>
-            email: {cust.email}
-            <br></br>
-            <br></br>
-            Departure Airport:
-            {dep.iata_code} {dep.airport_name}
-            <br></br>
-            from: {dep.municipality} {dep.iso_country}
-            <br></br>
-            <br></br>
-            Return Airport:
-            {ret.iata_code} {ret.airport_name}
-            <br></br>
-            from: {ret.municipality} {ret.iso_country}
-            <br></br>
-            <br></br>
-            Number of passengers: {singleQuote.numPeople}
-            <br></br>
-            <br></br>
-            {transp ? (
-              <>
-                <p>Ground Transportation: {transp.category} </p>
-                <br></br>
-                <p>Price per unit: {transp.price}</p>
-              </>
-            ) : (
-              <p>Ground Transportation: none </p>
-            )}
-            <br></br>
-            <br></br>
-            Total cost estimate: {singleQuote.price}
-            <br></br>
+            <div className={classes.header}>
+              <Typography variant={"h6"}>Quote ID: {singleQuote.id}</Typography>
+              <img src="logo_ombre.png" alt="logo" className={classes.logo} />
+            </div>
+            <div className={classes.customer}>
+              <Typography variant={"h5"}>Quote made for </Typography>
+              <Typography>
+                {cust.first_name} {cust.last_name}
+              </Typography>
+              <Typography>phone: {cust.phone}</Typography>
+              <Typography>email: {cust.email}</Typography>
+            </div>
+            <div className={classes.flights}>
+              <Typography variant={"h5"}>Flight details </Typography>
+
+              <div className={classes.flightDetails}>
+                <div className={classes.depart}>
+                  <Typography variant={"h6"}>Departure Airport:</Typography>
+                  <Divider />
+                  <Typography>
+                    {dep.airport_name} ({dep.iata_code})
+                  </Typography>
+                  <Typography>
+                    {dep.municipality}, {dep.iso_country}
+                  </Typography>
+                </div>
+
+                <div className={classes.depart}>
+                  <Typography variant={"h6"}>Return Airport:</Typography>
+                  <Divider />
+                  <Typography>
+                    {ret.airport_name} ({ret.iata_code})
+                  </Typography>
+                  <Typography>
+                    {ret.municipality}, {ret.iso_country}
+                  </Typography>
+                </div>
+              </div>
+            </div>
+            <div className={classes.other}>
+              <Typography variant={"h5"}>Other Details</Typography>
+              <Typography>
+                Number of passengers: {singleQuote.numPeople}
+              </Typography>
+              {transp ? (
+                <>
+                  <Typography>
+                    Ground transportation: {transp.category}
+                  </Typography>
+                  <Typography variant={"p"}>
+                    (price per unit: {transp.price}){" "}
+                  </Typography>
+                </>
+              ) : (
+                <Typography>Ground Transportation: none </Typography>
+              )}
+            </div>
+            <div className={classes.flights}>
+              <Divider />
+              <Typography variant={"h6"}>
+                Total cost estimate: {singleQuote.price}
+              </Typography>
+            </div>
           </Card>
         )}
       </Grid>
@@ -109,9 +149,3 @@ const SingleQuote = () => {
 };
 
 export default SingleQuote;
-
-// departure destination and location with airports
-// departure and return date
-// number of travellers
-// transportation during travels
-// contact information
