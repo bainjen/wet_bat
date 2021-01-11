@@ -4,12 +4,13 @@ import { QuoteContext } from "../QuoteContext";
 
 const RetDate = () => {
   const { inputState } = useContext(QuoteContext);
-  const { returnDate, handleReturn } = inputState;
+  const { returnDate, departureDate, handleReturn } = inputState;
 
   return (
     <KeyboardDatePicker
       disableToolbar
       variant="inline"
+      minDate={departureDate}
       format="MM/dd/yyyy"
       margin="normal"
       id="ret-date-picker-dialogue"

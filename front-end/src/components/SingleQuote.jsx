@@ -55,6 +55,7 @@ const SingleQuote = () => {
   const { quoteIndex } = quoteState;
 
   const classes = useStyles();
+
   let singleQuote;
   let cust;
   let dep;

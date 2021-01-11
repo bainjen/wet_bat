@@ -6,10 +6,12 @@ const DepDate = () => {
   const { inputState } = useContext(QuoteContext);
   const { departureDate, handleDeparture } = inputState;
 
+  const today = new Date();
   return (
     <KeyboardDatePicker
       disableToolbar
       variant="inline"
+      minDate={today}
       format="MM/dd/yyyy"
       margin="normal"
       id="dep-date-picker-dialogue"
