@@ -1,14 +1,16 @@
 import * as React from "react";
+import { useContext } from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import { QuoteContext } from "./QuoteContext";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "name", headerName: "Name", width: 130 },
-  { field: "destination", headerName: "Destination", width: 130 },
+  { field: "id", headerName: "Quote ID", width: 110 },
+  { field: "name", headerName: "Name", width: 160 },
+  { field: "destination", headerName: "Destination", width: 160 },
   {
     field: "price",
     headerName: "Price",
-    type: "number",
+    // type: "number",
     width: 90,
   },
   // {
@@ -33,16 +35,24 @@ const rows = [
 ];
 
 const QuoteList = () => {
+  const { dataState } = useContext(QuoteContext);
+  const { loaded, setQuotes } = dataState;
+  const { quotes } = dataState;
+  // console.log(quotes); // array of objects
+
+  // const rows = quotes.map((quote, i) => {
+  //   return {
+  //     id: quote.id,
+  //     name: ,
+
+  //  }
+  // })
+
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+      <DataGrid rows={rows} columns={columns} pageSize={5} />
     </div>
   );
 };
 
 export default QuoteList;
-
-// id
-// name
-// destination
-// price

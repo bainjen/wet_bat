@@ -11,6 +11,7 @@ const QuoteProvider = ({ children }) => {
     transportation,
     quotes,
     setQuotes,
+    fullQuoteData,
     loaded,
   } = useAppData();
 
@@ -44,6 +45,7 @@ const QuoteProvider = ({ children }) => {
           transportation,
           quotes,
           setQuotes,
+          fullQuoteData,
           loaded,
         },
         inputState: {
