@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Typography } from "@material-ui/core";
+import { QuoteContext } from "./QuoteContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Banner = () => {
+  const { dataState } = useContext(QuoteContext);
+  const { quotes, customers } = dataState;
+
   const classes = useStyles();
 
   return (
@@ -71,13 +75,13 @@ const Banner = () => {
 
         <div className={classes.bottom}>
           <Typography className={classes.num} variant={"h3"}>
-            101
+            {customers.length}
           </Typography>
           <Typography className={classes.side} variant={"h6"}>
             New <br></br>Leads
           </Typography>
           <Typography className={classes.num} variant={"h3"}>
-            35
+            {quotes.length}
           </Typography>
           <Typography className={classes.side} variant={"h6"}>
             Quotes <br></br>Created

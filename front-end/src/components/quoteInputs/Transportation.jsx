@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { QuoteContext } from "../QuoteContext";
-import { Menu } from "@material-ui/core";
 
 const Transportation = () => {
   const { inputState, dataState } = useContext(QuoteContext);

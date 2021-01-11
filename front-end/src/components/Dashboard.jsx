@@ -42,7 +42,6 @@ const Dashboard = () => {
       <Grid container spacing={3}>
         {/* row one  */}
         <Grid item xs={12}>
-          {/* <Paper className={classes.banner}>welcome banner</Paper> */}
           <Banner />
         </Grid>
       </Grid>
