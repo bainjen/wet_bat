@@ -1,10 +1,18 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import useAppData from "../hooks/useAppData";
 import useFormInputs from "../hooks/useFormInputs";
 
 const QuoteContext = createContext();
 
 const QuoteProvider = ({ children }) => {
+  const [viewIndex, setViewIndex] = useState(0);
+  const [quoteIndex, setQuoteIndex] = useState();
+
+  const handleQuoteClick = (e) => {
+    setQuoteIndex(e.row.id);
+    setViewIndex(1);
+  };
+
   const {
     customers,
     airports,
@@ -67,6 +75,13 @@ const QuoteProvider = ({ children }) => {
           handleLastName,
           email,
           handleEmail,
+        },
+        quoteState: {
+          viewIndex,
+          setViewIndex,
+          quoteIndex,
+          setQuoteIndex,
+          handleQuoteClick,
         },
       }}
     >

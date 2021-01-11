@@ -15,8 +15,9 @@ const columns = [
 ];
 
 const QuoteList = () => {
-  const { dataState } = useContext(QuoteContext);
+  const { dataState, quoteState } = useContext(QuoteContext);
   const { fullQuoteData } = dataState;
+  const { handleQuoteClick } = quoteState;
 
   const rows = fullQuoteData.map((quote, i) => {
     return {
@@ -29,7 +30,12 @@ const QuoteList = () => {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={5} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        onRowClick={(e) => handleQuoteClick(e)}
+      />
     </div>
   );
 };
