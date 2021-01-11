@@ -143,7 +143,9 @@ router.post("/quotes", cors(corsOptions), async (req, res) => {
     returnAirport.latitude,
     returnAirport.longitude
   );
-  const { price } = transportation.find((d) => d.id === transportOption);
+  const { price } = transportOption
+    ? transportation.find((d) => d.id === transportOption)
+    : { price: "$0.00" };
   // price is a string
   const convertedTransportPrice = Number(price.replace("$", ""));
   const quotePrice = calcQuotePrice(
