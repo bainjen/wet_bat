@@ -27,6 +27,7 @@ const useAppData = () => {
       const row = {
         id: quote.id,
         price: quote.price,
+        numPeople: quote.number_travellers,
         selectedCustomer,
         selectedDeparture,
         selectedReturn,
