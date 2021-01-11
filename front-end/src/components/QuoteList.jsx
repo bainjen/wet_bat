@@ -36,6 +36,7 @@ const QuoteList = ({ height, nRow }) => {
     >
       <DataGrid
         rows={rows}
+        elevation={0}
         columns={columns}
         pageSize={nRow}
         onRowClick={(e) => handleQuoteClick(e)}

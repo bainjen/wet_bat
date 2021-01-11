@@ -10,6 +10,7 @@ import {
 import QuoteForm from "./QuoteForm";
 import QuoteList from "./QuoteList";
 import Banner from "./Banner";
+import NewLeads from "./NewLeads";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,7 +57,7 @@ const Dashboard = () => {
               />
             </ListItem>
             <Divider />
-            {<QuoteForm />}
+            <QuoteForm />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={5}>
@@ -80,6 +81,7 @@ const Dashboard = () => {
               />
             </ListItem>
             <Divider />
+            <NewLeads />
           </Paper>
         </Grid>
       </Grid>
