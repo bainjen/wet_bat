@@ -13,7 +13,7 @@ const Email = () => {
       InputLabelProps={{
         shrink: true,
       }}
-      variant="filled"
+      variant="standard"
       defaultValue={""}
       onChange={handleEmail}
     />

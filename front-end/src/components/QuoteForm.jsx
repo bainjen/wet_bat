@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import axios from "axios";
 
 // MUI
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -23,20 +23,34 @@ import Email from "./quoteInputs/Email";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
     "& .MuiTextField-root": {
-      margin: theme.spacing(2),
+      width: "22ch",
+      background: theme.palette.lightBlue,
+    },
+    "& .MuiAutocomplete-root": {
       width: "22ch",
     },
   },
 
   flexRow: {
-    alignItems: "space-evenly",
-    justifyContent: "space-evenly",
-
-    // display: "flex",
-    // margin: theme.spacing(1),
+    display: "flex",
+    alignItems: "space-around",
+    justifyContent: "space-around",
+    width: "100%",
+    margin: "3% 0",
   },
 }));
+
+const StyledButton = withStyles({
+  root: {
+    background: "#5BBFBA",
+    color: "white",
+    borderRadius: "100px",
+  },
+})(Button);
 
 const QuoteForm = () => {
   const { dataState, inputState } = useContext(QuoteContext);
@@ -81,44 +95,40 @@ const QuoteForm = () => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       {loaded && (
         <form className={classes.root} autoComplete="off">
-          {/* <Grid container spacing={2} className={classes.flexForm}> */}
-          <Grid container spacing={2} className={classes.flexRow}>
-            <Grid item>
-              <DepFlight />
-            </Grid>
-            <Grid item>
-              <RetFlight />
-            </Grid>
-          </Grid>
+          <div className={classes.flexRow}>
+            <DepFlight />
 
-          <Grid container spacing={2} className={classes.flexRow}>
+            <RetFlight />
+          </div>
+
+          <div className={classes.flexRow}>
             <DepDate />
             <RetDate />
-          </Grid>
+          </div>
 
-          <Grid container spacing={2} className={classes.flexRow}>
+          <div className={classes.flexRow}>
             <NumPeople />
             <Transportation />
-          </Grid>
+          </div>
 
-          <Grid container spacing={2} className={classes.flexRow}>
+          <div className={classes.flexRow}>
             <FirstName />
             <LastName />
-          </Grid>
+          </div>
 
-          <Grid container spacing={2} className={classes.flexRow}>
+          <div className={classes.flexRow}>
             <Email />
 
-            <Button
-              className={classes.btn}
+            <StyledButton
+              // className={classes.btn}
               variant="contained"
               disableElevation
               size="large"
               onClick={sendQuote}
             >
               Create a quote
-            </Button>
-          </Grid>
+            </StyledButton>
+          </div>
         </form>
       )}
     </MuiPickersUtilsProvider>

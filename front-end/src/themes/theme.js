@@ -9,5 +9,6 @@ export const mainTheme = createMuiTheme({
     green: "#A4D4AE",
     gray: "#E0E0E0",
     darkGray: "#A2A2A2",
+    lightBlue: "#EDF0F8",
   },
 });

@@ -24,7 +24,7 @@ const NumPeople = () => {
       InputLabelProps={{
         shrink: true,
       }}
-      variant="filled"
+      variant="standard"
       defaultValue={1}
       onChange={handlePeople}
     >

@@ -15,7 +15,7 @@ const DepDate = () => {
       format="MM/dd/yyyy"
       margin="normal"
       id="dep-date-picker-dialogue"
-      label="Departure Date"
+      label="DEPARTURE DATE"
       value={departureDate}
       onChange={handleDeparture}
       KeyboardButtonProps={{

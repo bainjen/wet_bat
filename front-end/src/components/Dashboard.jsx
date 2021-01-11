@@ -9,8 +9,7 @@ import {
 } from "@material-ui/core";
 import QuoteForm from "./QuoteForm";
 import QuoteList from "./QuoteList";
-
-//heights needs to be dynamic, content needs to be dynamic.
+import Banner from "./Banner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
   banner: {
     minHeight: "300px",
+    background: `linear-gradient(to bottom right, ${theme.palette.teal} 0%, ${theme.palette.blue} 100%)`,
   },
   r2: {
-    height: "550px",
+    minHeight: "550px",
+    width: "100%",
   },
   headerText: {
     color: theme.palette.blue,
@@ -41,7 +42,8 @@ const Dashboard = () => {
       <Grid container spacing={3}>
         {/* row one  */}
         <Grid item xs={12}>
-          <Paper className={classes.banner}>welcome banner</Paper>
+          {/* <Paper className={classes.banner}>welcome banner</Paper> */}
+          <Banner />
         </Grid>
       </Grid>
       {/* row two */}

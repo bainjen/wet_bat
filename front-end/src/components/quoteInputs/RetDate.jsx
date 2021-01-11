@@ -14,7 +14,7 @@ const RetDate = () => {
       format="MM/dd/yyyy"
       margin="normal"
       id="ret-date-picker-dialogue"
-      label="Departure Date"
+      label="RETURN DATE"
       value={returnDate}
       onChange={handleReturn}
       KeyboardButtonProps={{

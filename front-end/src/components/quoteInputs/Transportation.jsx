@@ -31,7 +31,7 @@ const Transportation = () => {
       InputLabelProps={{
         shrink: true,
       }}
-      variant="filled"
+      variant="standard"
       defaultValue={""}
       onChange={handleTransportation}
     >
