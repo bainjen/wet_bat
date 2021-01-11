@@ -20,10 +20,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    minHeight: "550px",
+    minHeight: "300px",
   },
   banner: {
     minHeight: "300px",
+  },
+  r2: {
+    height: "550px",
   },
   headerText: {
     color: theme.palette.blue,
@@ -44,7 +47,7 @@ const Dashboard = () => {
       {/* row two */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={5}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} className={classes.r2}>
             <ListItem>
               <ListItemText
                 className={classes.headerText}
@@ -56,7 +59,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={5}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} className={classes.r2}>
             <ListItem>
               <ListItemText
                 className={classes.headerText}
@@ -64,11 +67,13 @@ const Dashboard = () => {
               />
             </ListItem>
             <Divider />
-            {<QuoteList />}
+            <QuoteList height={502} nRow={7} />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Paper className={classes.paper}>new leads list</Paper>
+          <Paper className={classes.paper} className={classes.r2}>
+            new leads list
+          </Paper>
         </Grid>
       </Grid>
       {/* row three  */}
